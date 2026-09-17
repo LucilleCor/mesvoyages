@@ -21,7 +21,7 @@ class VoyagesController extends AbstractController {
                 ]);
     }
     
-    #[Route('/voyage/tri/{champ}/{ordre}', name: 'voyages.sort')]
+    #[Route('/voyages/tri/{champ}/{ordre}', name: 'voyages.sort')]
     public function sort($champ, $ordre): Response{
         $visites = $this->repository->findAllOrderBy($champ, $ordre);
         return $this->render("pages/voyages.html.twig", [
@@ -29,12 +29,20 @@ class VoyagesController extends AbstractController {
         ]);
     }
     
-    #[Route('/voyage/recherche/{champ}', name: 'voyages.findallequal')]
+    #[Route('/voyages/recherche/{champ}', name: 'voyages.findallequal')]
     public function findAllEqual($champ, Request $request): Response{
         $valeur = $request->get("recherche");
         $visites = $this->repository->findByEqualValue($champ, $valeur);
         return $this->render("pages/voyages.html.twig", [
             'visites' => $visites
+        ]);
+    }
+    
+    #[Route('/voyages/voyage/{id}', name: 'voyages.showone')]
+    public function showOne($id): Response{
+        $visite = $this->repository->find($id);
+        return $this->render("pages/voyage.html.twig", [
+            'visite' => $visite
         ]);
     }
     
