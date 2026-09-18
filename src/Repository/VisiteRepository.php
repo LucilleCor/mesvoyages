@@ -6,8 +6,6 @@ use App\Entity\Visite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-
-
 /**
  * @extends ServiceEntityRepository<Visite>
  */
@@ -65,6 +63,11 @@ class VisiteRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();                
     }
     
+    /**
+     * Ajoute une visite
+     * @param Visite $visite
+     * @return void
+     */
     public function add(Visite $visite): void
     {
        $this->getEntityManager()->persist($visite);
