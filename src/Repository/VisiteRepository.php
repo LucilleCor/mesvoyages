@@ -29,6 +29,15 @@ class VisiteRepository extends ServiceEntityRepository
                 ->getResult();
     }
     
+    
+    public function findNbLast($nb): array{
+        return $this->createQueryBuilder('v')
+                ->orderBy('v.datecreation', 'DESC')
+                ->setMaxResults($nb)
+                ->getQuery()
+                ->getResult();
+    }
+    
     /**
      * Enregistrements dont un champ est égal à une valeur
      * ou tous les enregistrements si la valeur est vide
